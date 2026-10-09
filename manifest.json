@@ -1,0 +1,69 @@
+{
+  "manifest_version": 3,
+  "name": "SpotyTube",
+  "version": "0.1.0",
+  "description": "Abre o videoclipe oficial do que está tocando no Spotify e toca no Spotify o que você abre no YouTube.",
+  "minimum_chrome_version": "116",
+  "icons": {
+    "16": "icons/icon16.png",
+    "32": "icons/icon32.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
+  },
+  "background": {
+    "service_worker": "src/background/service-worker.js",
+    "type": "module"
+  },
+  "action": {
+    "default_title": "SpotyTube",
+    "default_popup": "src/popup/popup.html",
+    "default_icon": {
+      "16": "icons/icon16.png",
+      "32": "icons/icon32.png"
+    }
+  },
+  "options_ui": {
+    "page": "src/options/options.html",
+    "open_in_tab": true
+  },
+  "permissions": [
+    "identity",
+    "storage",
+    "alarms"
+  ],
+  "host_permissions": [
+    "https://api.spotify.com/*",
+    "https://accounts.spotify.com/*",
+    "https://www.youtube.com/*"
+  ],
+  "optional_host_permissions": [
+    "https://www.googleapis.com/*"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "https://www.youtube.com/*"
+      ],
+      "js": [
+        "src/content/youtube.js"
+      ],
+      "run_at": "document_idle",
+      "all_frames": false
+    }
+  ],
+  "commands": {
+    "next-candidate": {
+      "suggested_key": {
+        "default": "Alt+Shift+N"
+      },
+      "description": "Próximo candidato de clipe"
+    },
+    "toggle-enabled": {
+      "suggested_key": {
+        "default": "Alt+Shift+S"
+      },
+      "description": "Pausar/retomar SpotyTube"
+    }
+  },
+  "key": "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAnd2lJiXeuJ4eyJNtxeiMy/nW17wBoijoYmXCXeFoxIfEym3ZDZfFRhxEKVDZXiryIWaZc7w/wkOlO3vQvAZPO4YW/edOmr04/MTZ/RwYsXhMtN6n45wjI4vSOtiKBqGNoWJf5bcojAI0LZJx2a7PY8KK/zbr9h5+2A8Ihw07AsGUPpVw71f39kv9H+zYz8JQm7GGyuM5wGWbPKQKwzWE907cLs+UmpJff6z00lnRPpGt/K/tsBZ0mqdWpEDNr5nt1FN48hPwNXAq/rDPa9VYPfY6NcBb6uTDrBka4QJVQZ6vuAg0EIIr7LUr8YwpIZhtHrFhDKodna86jpIgW+Io/QIDAQAB"
+}

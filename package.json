@@ -1,0 +1,13 @@
+{
+  "name": "spotytube",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Extensao Chrome MV3 (sem build, sem dependencias). package.json existe so para os scripts de dev.",
+  "type": "module",
+  "scripts": {
+    "test": "node --test \"tests/**/*.test.js\"",
+    "check": "node tools/check.mjs",
+    "icons": "node tools/gen-icons.mjs",
+    "key": "node tools/gen-key.mjs"
+  }
+}

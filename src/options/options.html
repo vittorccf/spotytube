@@ -1,0 +1,114 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>SpotyTube — Opções</title>
+  <link rel="stylesheet" href="../shared/theme.css">
+  <link rel="stylesheet" href="options.css">
+</head>
+<body>
+  <main>
+    <header class="hero">
+      <img class="st-logo" src="../../icons/logo.svg" width="70" height="55" alt="">
+      <div>
+        <h1>SpotyTube</h1>
+        <p class="st-subdued">O clipe acompanha a música.</p>
+      </div>
+    </header>
+
+    <section class="panel">
+      <h2>Spotify</h2>
+
+      <div class="st-field">
+        <label for="clientId">Client ID</label>
+        <div class="st-inline">
+          <input id="clientId" class="st-input" type="text" maxlength="32" spellcheck="false" autocomplete="off" placeholder="32 caracteres hexadecimais">
+          <button id="saveClientId" class="st-btn st-btn-primary">Salvar</button>
+        </div>
+        <div id="clientIdMsg" class="st-msg"></div>
+      </div>
+
+      <div class="st-field">
+        <label for="redirectUri">Redirect URI (cole exatamente isto no dashboard do Spotify)</label>
+        <div class="st-inline">
+          <input id="redirectUri" class="st-input" type="text" readonly>
+          <button id="copyRedirect" class="st-btn">Copiar</button>
+        </div>
+      </div>
+
+      <ol class="steps">
+        <li>Acesse <a href="https://developer.spotify.com/dashboard" target="_blank" rel="noopener">developer.spotify.com/dashboard</a> e faça login.</li>
+        <li><b>Create app</b>: nome livre; em <b>Redirect URIs</b> cole exatamente a URI acima (incluindo a <code>/</code> final); em “Which API/SDKs are you planning to use?” marque <b>Web API</b>; aceite os termos.</li>
+        <li>Abra o app → <b>Settings</b> → copie o <b>Client ID</b> e cole acima. Não precisa de Client Secret (usamos PKCE).</li>
+        <li>Se o app estiver em <i>Development Mode</i> e o dashboard tiver <b>User Management</b>, adicione o e-mail da sua conta Spotify.</li>
+        <li>Clique em “Conectar Spotify”.</li>
+        <li>Se você mover a pasta da extensão sem a chave fixa no manifest, o ID muda: atualize a Redirect URI no dashboard.</li>
+      </ol>
+
+      <div class="account">
+        <span id="authStatus" class="st-status">—</span>
+        <div class="st-inline">
+          <button id="btnLogin" class="st-btn st-btn-primary st-btn-lg">Conectar Spotify</button>
+          <button id="btnLogout" class="st-btn">Desconectar</button>
+        </div>
+      </div>
+      <p class="st-caption st-subdued">Para revogar o acesso no lado do Spotify: <a href="https://www.spotify.com/account/apps/" target="_blank" rel="noopener">spotify.com/account/apps</a>.</p>
+
+      <div class="st-field">
+        <label for="device">Dispositivo preferido (usado quando não há dispositivo ativo)</label>
+        <div class="st-inline">
+          <select id="device" class="st-input"><option value="">— nenhum —</option></select>
+          <button id="refreshDevices" class="st-btn">Atualizar lista</button>
+        </div>
+        <div id="deviceMsg" class="st-msg"></div>
+      </div>
+    </section>
+
+    <section class="panel">
+      <h2>YouTube</h2>
+      <div class="st-field">
+        <span class="st-label">Aba do clipe</span>
+        <div>
+          <label class="st-choice"><input type="radio" name="focusTab" value="false"> Atualizar em segundo plano</label>
+          <label class="st-choice"><input type="radio" name="focusTab" value="true"> Trazer para o primeiro plano</label>
+        </div>
+        <label class="st-switch"><input type="checkbox" id="pinTab"><span class="st-switch-track"></span><span class="st-switch-label">Fixar aba</span></label>
+      </div>
+
+      <div class="st-field">
+        <span class="st-label">Ação YouTube → Spotify</span>
+        <div>
+          <label class="st-choice"><input type="radio" name="ytAction" value="play-mute-video"> Tocar no Spotify e silenciar o vídeo (sincronizado)</label>
+          <label class="st-choice"><input type="radio" name="ytAction" value="play-pause-video"> Tocar no Spotify e pausar o vídeo</label>
+          <label class="st-choice"><input type="radio" name="ytAction" value="queue"> Adicionar à fila do Spotify</label>
+        </div>
+      </div>
+
+      <div class="st-field">
+        <label for="ytApiKey">YouTube Data API key (opcional, usada se a leitura da busca falhar)</label>
+        <div class="st-inline">
+          <input id="ytApiKey" class="st-input" type="password" spellcheck="false" autocomplete="off" placeholder="AIza...">
+          <button id="testKey" class="st-btn">Testar</button>
+          <button id="saveKey" class="st-btn st-btn-primary">Salvar</button>
+        </div>
+        <div id="keyMsg" class="st-msg"></div>
+      </div>
+    </section>
+
+    <section class="panel">
+      <h2>Cache</h2>
+      <div class="st-inline split">
+        <span id="cacheCount" class="st-subdued">…</span>
+        <button id="clearCache" class="st-btn">Limpar cache</button>
+      </div>
+    </section>
+
+    <section class="panel">
+      <h2>Avançado</h2>
+      <label class="st-switch"><input type="checkbox" id="debug"><span class="st-switch-track"></span><span class="st-switch-label">Logs de debug (console do service worker)</span></label>
+    </section>
+  </main>
+  <script type="module" src="options.js"></script>
+</body>
+</html>

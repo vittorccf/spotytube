@@ -1,0 +1,4 @@
+* text=auto
+tests/fixtures/** -text
+*.png binary
+*.woff2 binary

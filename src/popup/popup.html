@@ -1,0 +1,115 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <title>SpotyTube</title>
+  <link rel="stylesheet" href="../shared/theme.css">
+  <link rel="stylesheet" href="popup.css">
+</head>
+<body>
+  <header class="top">
+    <div class="brand">
+      <img class="st-logo" src="../../icons/logo.svg" width="42" height="33" alt="">
+      <h1>SpotyTube</h1>
+    </div>
+    <label class="st-switch" title="Ativar/pausar SpotyTube (Alt+Shift+S)">
+      <input type="checkbox" id="enabled">
+      <span class="st-switch-track"></span>
+      <span id="enabledLabel" class="st-switch-label">Ativo</span>
+    </label>
+  </header>
+
+  <main class="content">
+    <section id="login">
+      <div id="loginSetup" class="stack" hidden>
+        <p class="st-subdued">Configure o Client ID do Spotify para começar.</p>
+        <button id="btnSetup" class="st-btn st-btn-primary">Configurar</button>
+      </div>
+      <div id="loginOut" hidden>
+        <button id="btnLogin" class="st-btn st-btn-primary wide">Conectar Spotify</button>
+      </div>
+      <div id="loginIn" class="row" hidden>
+        <span class="st-status st-status-on">Conectado</span>
+        <button id="btnLogout" class="st-btn st-btn-sm st-btn-tertiary">Sair</button>
+      </div>
+    </section>
+
+    <section id="errorBox" class="st-alert" role="alert" hidden>
+      <span id="errorText"></span>
+      <button id="errorAction" class="st-btn" hidden></button>
+    </section>
+
+    <section id="track" class="stack-sm" hidden>
+      <div class="st-overline">Tocando agora</div>
+      <div class="st-card">
+        <div class="st-media">
+          <img id="cover" class="st-cover" alt="" width="56" height="56">
+          <div>
+            <div id="trackName" class="st-title st-title-lg"></div>
+            <div id="trackArtists" class="st-sub"></div>
+            <div id="trackDevice" class="st-sub"></div>
+          </div>
+        </div>
+        <div class="progress-wrap">
+          <div class="st-progress"><span id="progressBar"></span></div>
+          <div class="st-time"><span id="progressPos">0:00</span><span id="progressDur">0:00</span></div>
+        </div>
+      </div>
+    </section>
+    <section id="trackEmpty" class="st-subdued" hidden></section>
+
+    <section id="clip" class="st-card" hidden>
+      <div class="st-media">
+        <img id="thumb" class="st-thumb" alt="" width="112" height="63">
+        <div>
+          <div id="clipTitle" class="st-title"></div>
+          <div id="clipChannel" class="st-sub"></div>
+          <div class="st-chips"><span id="clipIndex" class="st-chip"></span><span id="clipSource" class="st-chip"></span></div>
+        </div>
+      </div>
+      <div class="st-actions">
+        <button id="btnNext" class="st-btn st-btn-sm" title="Alt+Shift+N">Próximo candidato</button>
+        <button id="btnReopen" class="st-btn st-btn-sm">Reabrir</button>
+        <button id="btnFocus" class="st-btn st-btn-sm">Ir para a aba</button>
+        <button id="btnSearch" class="st-btn st-btn-sm st-btn-tertiary">Buscar no YouTube</button>
+      </div>
+      <div id="offsetRow" class="st-offset">
+        Ajuste de sync
+        <button id="btnOffMinus" class="st-btn st-btn-sm st-btn-icon" aria-label="Atrasar o vídeo 1 segundo">−1</button>
+        <output id="offsetVal">0s</output>
+        <button id="btnOffPlus" class="st-btn st-btn-sm st-btn-icon" aria-label="Adiantar o vídeo 1 segundo">+1</button>
+      </div>
+    </section>
+
+    <section id="suggestion" class="st-suggestion" hidden>
+      <div class="st-overline">YouTube → Spotify</div>
+      <p id="suggestionText"></p>
+      <button id="btnSuggestion" class="st-btn st-btn-primary">Tocar no Spotify</button>
+    </section>
+
+    <section class="group">
+      <label class="st-switch"><input type="checkbox" id="spotifyToYoutube"><span class="st-switch-track"></span><span class="st-switch-label">Spotify → YouTube</span></label>
+      <label class="st-switch"><input type="checkbox" id="youtubeToSpotify"><span class="st-switch-track"></span><span class="st-switch-label">YouTube → Spotify</span></label>
+    </section>
+
+    <section class="group">
+      <div class="st-overline">Modo</div>
+      <div>
+        <label class="st-choice"><input type="radio" name="mode" value="sync"> Vídeo mudo sincronizado</label>
+        <label class="st-choice"><input type="radio" name="mode" value="handoff"> Pausar Spotify, áudio no YouTube</label>
+        <label class="st-choice"><input type="radio" name="mode" value="open"> Só abrir o vídeo</label>
+      </div>
+      <p class="st-caption st-subdued">Vale a partir da próxima faixa. Use “Reabrir” para a atual.</p>
+    </section>
+
+    <p class="st-caption st-subdued">Abas do YouTube abertas antes de instalar ou recarregar a extensão precisam ser recarregadas.</p>
+  </main>
+
+  <footer class="bottom">
+    <button id="btnOptions" class="st-btn st-btn-sm st-btn-tertiary">Opções</button>
+    <span id="statusText" class="st-status"></span>
+  </footer>
+
+  <script type="module" src="popup.js"></script>
+</body>
+</html>
